@@ -28,26 +28,63 @@ function Airplane(name) {
   
   /*
     TASK 1
-      - Write a Person Constructor that initializes `name` and `age` from arguments.
-      - All instances of Person should initialize with an empty `stomach` array.
-      - Give instances of Person the ability to `.eat("someFood")`:
-          + When eating an edible, it should be pushed into the `stomach`.
-          + The `eat` method should have no effect if there are 10 items in the `stomach`.
-      - Give instances of Person the ability to `.poop()`:
-          + When an instance poops, its `stomach` should empty.
-      - Give instances of Person a method `.toString()`:
-          + It should return a string with `name` and `age`. Example: "Mary, 50"
+      - Write a Person Constructor that initializes `name` and `age` from arguments. x
+      - All instances of Person should initialize with an empty `stomach` array. x
+      - Give instances of Person the ability to `.eat("someFood")`: x
+          + When eating an edible, it should be pushed into the `stomach`.x
+          + The `eat` method should have no effect if there are 10 items in the `stomach`.x
+      - Give instances of Person the ability to `.poop()`: x
+          + When an instance poops, its `stomach` should empty.x
+      - Give instances of Person a method `.toString()`:x
+          + It should return a string with `name` and `age`. Example: "Mary, 50"x
   */
-  
- function Person() {
+
+
+  // Person constructor function
+ function Person(name, age) {
+   this.name = name;
+   this.age = age;
+   this.stomach = [];
+
     
   }
- 
- 
+//  eat function for Person
+  Person.prototype.eat = function(edible){
+    if(this.stomach.length < 10){
+      this.stomach.push(edible);
+    }
+  }
 
-  
-  
-  
+// poop function for Person 
+ Person.prototype.poop = function(){
+   this.stomach = [];
+
+ }
+//  string output function for Person
+Person.prototype.toString = function(){
+  return `${this.name}, ${this.age}`;
+}
+// creating new Persons with the Constructor Function
+const personOne = new Person('Erik', 26);
+const personTwo = new Person('Old Man', 100);
+const personThree = new Person('Buddha', 80);
+// out putting new Persons 
+console.log(personOne.toString());
+console.log(personTwo.toString());
+console.log(personThree.toString());
+
+// constructed personThree eating (adding to stomach array)
+personThree.eat('fruit');
+personThree.eat('tea');
+personThree.eat('bread');
+// checking to see if items added to array
+console.log(personThree.stomach);
+// emptying array with poop() function
+personThree.poop();
+// checking if stomach array has been emptied
+console.log(personThree.stomach);
+
+
   
   /*
     TASK 2
@@ -62,10 +99,25 @@ function Airplane(name) {
       - STRETCH: A car which runs out of `fuel` while driving can't drive any more distance:
           + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
   */
+  // creates car with model and MpG
+  function Car(model, milesPerGallon) {
+    this.model = model;
+    this.milesPerGallon = milesPerGallon;
+    this.tank = 0;
+    this.odometer = 0;
+     
+   }
+   // creating new carOne
+   const carOne = new Car('Subarau', 25);
+   console.log(carOne);
+   // fill function 
+   Car.prototype.fill = function(gallons){
+       return this.tank = this.tank + gallons; 
+     }
+   
+   console.log(carOne.fill(20));
+
   
- function Car() {
-    
-  }
   
   
   /*
@@ -75,10 +127,44 @@ function Airplane(name) {
       - Besides the methods on Person.prototype, babies have the ability to `.play()`:
           + Should return a string "Playing with x", x being the favorite toy.
   */
- function Baby() {
+ function Baby(name, age, faveToy) {
+  Person.call(this, name, age); // tells Baby to inherit name, age, and stomach from Person
+  this.faveToy = faveToy; 
    
   }
- 
+
+// tells Baby to inherit Person's methods
+  Baby.prototype = Object.create(Person.prototype);
+  
+//  play function for Baby
+  Baby.prototype.play = function(){
+    return `Playing with ${this.faveToy}`;
+  }
+
+
+ // creating new Persons with the Constructor Function
+const babyOne = new Baby('Erik', 0, 'Blanket');
+const babyTwo = new Baby('Baby Man', 0, 'Sword');
+const babyThree = new Baby('Buddha', 0, 'Breath');
+// out putting new Persons 
+console.log(babyOne.toString());
+console.log(babyTwo.toString());
+console.log(babyThree.toString());
+
+// constructed personThree eating (adding to stomach array)
+babyThree.eat('fruit');
+babyThree.eat('tea');
+babyThree.eat('bread');
+// checking to see if items added to array
+console.log(babyThree.stomach);
+// emptying array with poop() function
+babyThree.poop();
+// checking if stomach array has been emptied
+console.log(babyThree.stomach);
+// checking to see if baby plays 
+console.log(babyThree.play());
+console.log(babyOne.play());
+console.log(babyTwo.play());
   
   /* 
     TASK 4
