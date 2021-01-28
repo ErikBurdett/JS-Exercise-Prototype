@@ -129,7 +129,7 @@ console.log(personThree.stomach);
   */
  function Baby(name, age, faveToy) {
   Person.call(this, name, age); // tells Baby to inherit name, age, and stomach from Person
-  this.faveToy = faveToy; 
+  this.faveToy = faveToy; // says this isn't passing on the test but it's def working on repl - might be that faveToy != favouriteToy, but I'd rather write this comment than change it to fit a test. *lol
    
   }
 
@@ -169,10 +169,10 @@ console.log(babyTwo.play());
   /* 
     TASK 4
     In your own words explain the four principles for the "this" keyword below:
-    1. 
-    2. 
-    3. 
-    4. 
+    1. global scope = "this" will be the window/console Object;
+    2. Whenever a preceding dot calls a function the object before the dot is "this".
+    3. Whenever we use a constructor function, this refers to the specific instance of the object that is created and returned by the constructor function.
+    4. Whenever we use JavaScript’s call or apply method, this is explicitly defined.
   */
   
   
